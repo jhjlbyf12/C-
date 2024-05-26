@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <regex>
+#include <set>
+
+using namespace std;
+
+int main(){
+
+    cout<< "Task 1"<< endl;
+
+    string s = {1, 2, 9, 9, 8, 56};
+    set<char> set1(begin(s), end(s));
+    if (set1.size()== s.size()){
+        cout<< "The numbers are not repeated"<<endl;
+    }
+    else
+    {
+        cout<< "The numbers are repeated"<<endl;            
+        }
+
+    cout<< "Task 2"<< endl;
+
+    string a = {1, 2, 3, 4, 5};
+    string b = {6, 7, 8, 9, 10};
+    set<char> set2(begin(a), end(a));
+    set<char> set3(begin(b), end(b));
+    set<char> set4;
+    set_union(set2.begin(), set2.end(),
+     set3.begin(), set3.end(), inserter(set4, set4.begin()));
+     if(set4.size() == 10){
+        cout<< "10 digits are used"<< endl;
+     }
+     else{
+        cout<<"10 digits are not used"<<endl;
+     }
+
+
+     cout<< "Task 3"<< endl;
+
+     string num =  "1 5 8 6 7";
+     string num1 = "5 9 6 7 5 6 8 591";
+
+     set<int> numA(begin(num), end(num));
+     set<int> numB(begin(num1), end(num1));
+     set<int> numC;
+
+      set_intersection(numA.begin(), numA.end(), numB.begin(), numB.end(), inserter(numC , numC.begin()));
+      cout<< numC.size()<<endl;
+      for (auto &f: numC){
+        cout<< f;
+      }
+
+    }   
