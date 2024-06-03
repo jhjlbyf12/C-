@@ -1,0 +1,152 @@
+#include <iostream>
+#include<memory>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <ctype.h>
+#include<forward_list>
+#include<conio.h> // для getche()
+#include <cstdlib>//для sort
+#include<cmath> // для struct или pair
+#include<algorithm>
+#include <conio.h>
+#include <queue>
+#include <string>
+
+using namespace std;
+
+
+struct Customer{
+    int customerID;
+    string name;
+    double balance;
+};
+
+// Перегрузка оператора
+ostream& operator <<(ostream &os, const Customer& customer){
+    os << "Customer ID: "<<customer.customerID;
+    os << "\nName: "<< customer.name;
+    os << "\nBalance: "<< customer.balance;
+    os << endl;
+    return os;
+}
+
+class BankQueue{
+    public:
+    // vector<int>numbers;                                         // порядковый номер в очереди
+    queue<Customer> q;                                             // объекты в очереди. 
+
+    void enqueue(const Customer& customer){                        // enqueue - ставить в очередь
+        q.push(customer);
+    }
+
+
+    void dequeue(){                                                // dequeue - Вывод из очереди,Удалить клиента из начала очереди
+        q.pop();                                                   // erase - стирать
+    }                                                             // front можно применить?
+
+
+    void displayQuouo(){                                          // Queue - очередь. Вывести на экран
+        queue<Customer> q2 = q;                                   // копия очереди, что бы вывести ее
+        while(!q2.empty()) {
+            cout << q2.front();
+
+        }                                                         // пока очередь не пустая
+    }
+
+    void deposit_funds(){                                         // внесите средства на счет
+        double deposit_1;           
+        cout << "Enter the amount you want to deposit\n";
+        cin >> deposit_1;  
+        double balance = balance + deposit_1;                   
+    }
+
+
+    void withdraw_funds(){                                        //снять средства
+        double deposit_2;
+        cout << "Enter the amount you want to withdraw\n";        
+        cin >> deposit_2;
+        double balance = balance - deposit_2;
+        if(deposit_2 > balance){
+            cout << "Insufficient funds\n";
+            cout << "Select the action again\n";                           
+        }        
+    }                        
+};
+
+
+int main(){
+    int option;
+
+    BankQueue bank;
+
+
+    while(true){
+        cout << "Input your option:\n";
+        cout << "1 for adding client\n";                         // добавить в очередь
+        cout << "2 for showing queue\n";                         // удалить из очереди
+        cout << "3 for deposit money\n";                         // внести средства
+        cout << "4 for withdraw funds\n";                        // вывода средств
+        cout << "5 watch the rest\n";                            // просмотреть остаток
+        cout << "6 exit\n";                                      // выход
+
+        Customer c;
+        cin >> option;
+        cout << "Enter a name\n";
+            cin >> c.name; 
+
+        if (option == 1) {
+            // ввести 3 поля
+            // создать объект от Customer                            
+            Customer c{1, "name", 1000};
+            bank.enqueue(c);
+        }
+
+        else if (option == 2){
+            Customer c{1, "name", 1000};
+            bank.dequeue();
+        }
+
+        else if(option == 3) {
+            bank.deposit_funds();
+        }
+
+        else if (option == 4){
+            bank.withdraw_funds();
+        }
+
+        else if (option == 5){
+            bank.displayQuouo();
+        }       
+        
+        else if(option == 6){
+            break;
+        }
+
+
+        switch(option){         
+        
+         case 1:
+            void enqueue(const int c);
+            break;
+         
+          case 2:
+            void dequeue(const int c);
+            break;
+
+          case 3:
+            void deposit_funds(const int c);
+            break;
+
+          case 4:
+            void withdraw_funds(const int c);
+
+          case 5:
+            void displayQuouo(const int c);
+            break;
+            
+           case 6:
+           exit;
+        };
+    }
+}
