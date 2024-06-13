@@ -48,17 +48,20 @@ class BankQueue{
 
     void displayQuouo(){                                          // Queue - очередь. Вывести на экран
         queue<Customer> q2 = q;                                   // копия очереди, что бы вывести ее
+        cout << "___________________\n\n";
         while(!q2.empty()) {
             cout << q2.front();
-
-        }                                                         // пока очередь не пустая
+            q2.pop();
+        }                                                        // пока очередь не пустая
+        cout << "___________________\n\n";
     }
 
     void deposit_funds(){                                         // внесите средства на счет
         double deposit_1;           
         cout << "Enter the amount you want to deposit\n";
         cin >> deposit_1;  
-        double balance = balance + deposit_1;                   
+        q.front().balance += deposit_1;
+        cout << "You have money: " << q.front().balance << endl;              
     }
 
 
@@ -66,11 +69,13 @@ class BankQueue{
         double deposit_2;
         cout << "Enter the amount you want to withdraw\n";        
         cin >> deposit_2;
-        double balance = balance - deposit_2;
-        if(deposit_2 > balance){
+        if(deposit_2 > q.front().balance){
             cout << "Insufficient funds\n";
             cout << "Select the action again\n";                           
-        }        
+        } else {
+            q.front().balance -= deposit_2;
+            cout << "You have money: " << q.front().balance << endl;
+        }       
     }                        
 };
 
@@ -84,26 +89,30 @@ int main(){
     while(true){
         cout << "Input your option:\n";
         cout << "1 for adding client\n";                         // добавить в очередь
-        cout << "2 for showing queue\n";                         // удалить из очереди
+        cout << "2 for pop from queue\n";                         // удалить из очереди
         cout << "3 for deposit money\n";                         // внести средства
         cout << "4 for withdraw funds\n";                        // вывода средств
-        cout << "5 watch the rest\n";                            // просмотреть остаток
+        cout << "5 for showing queue\n";                            // просмотреть остаток
         cout << "6 exit\n";                                      // выход
-
-        Customer c;
+        
         cin >> option;
-        cout << "Enter a name\n";
-            cin >> c.name; 
 
         if (option == 1) {
             // ввести 3 поля
-            // создать объект от Customer                            
-            Customer c{1, "name", 1000};
+            // создать объект от Customer         
+            Customer c;
+            
+            cout << "Enter a name\n";
+            cin >> c.name; 
+            cout << "Enter customerID\n";
+            cin >> c.customerID;  
+            cout << "Enter balance\n";
+            cin >> c.balance;                     
+            
             bank.enqueue(c);
         }
 
         else if (option == 2){
-            Customer c{1, "name", 1000};
             bank.dequeue();
         }
 
@@ -119,34 +128,12 @@ int main(){
             bank.displayQuouo();
         }       
         
-        else if(option == 6){
+        else{
             break;
         }
-
-
-        switch(option){         
-        
-         case 1:
-            void enqueue(const int c);
-            break;
-         
-          case 2:
-            void dequeue(const int c);
-            break;
-
-          case 3:
-            void deposit_funds(const int c);
-            break;
-
-          case 4:
-            void withdraw_funds(const int c);
-
-          case 5:
-            void displayQuouo(const int c);
-            break;
-            
-           case 6:
-           exit;
-        };
     }
 }
+
+
+
+    
