@@ -1,0 +1,61 @@
+#include <iostream>
+#include<memory>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <ctype.h>
+#include<forward_list>
+#include<conio.h> // для getche()
+#include <cstdlib>//для sort
+#include<cmath> // для struct или pair
+#include<algorithm>
+#include <conio.h>
+#include <queue>
+#include <string>
+#include<map>
+
+using namespace std;
+
+map<string, int> f(map<string, int> m1, map<string, int> m2){
+    map<string, int> res;
+
+    for(const auto p: m1){
+        string key1 = p.first;
+        if (m2.count(key1)){
+            res[key1] = m1[key1] + m2[key1];
+        }
+        else{
+            res[key1] = m1[key1];
+        }
+    }
+    for (const auto p: m2){
+        string key2 = p.first;
+        if (m1.count(key2) == 0){
+            res[key2] = m2[key2];
+        }
+    }
+
+    return res;
+}
+
+int main(){
+    map<string, int> m1 = {
+        {"a", 100},
+        {"b", 200},
+        {"c", 300}
+    };
+    map<string, int> m2 = {
+        {"a", 300}, 
+        {"b", 200},
+        {"d", 400}
+    };
+
+
+auto res = f(m1, m2);
+for(auto p: res){
+    auto key = p.first;
+
+    cout<<key<< ":" << res[key]<<endl;
+}
+}
+
